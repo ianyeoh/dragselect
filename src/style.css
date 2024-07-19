@@ -8,6 +8,12 @@
     gap: 1rem;
 }
 
+.ds-selection-box {
+    border: 1px solid #ac71ffaa;
+    background-color: #c9a5fbaa;
+    opacity: 50%;
+}
+
 .ds-selectable {
     background-color: #ddd;
     height: 50px;
