@@ -1,0 +1,15 @@
+.ds-container {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+
+    background-color: #eee;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.ds-selectable {
+    background-color: #ddd;
+    height: 50px;
+    width: 50px;
+}
