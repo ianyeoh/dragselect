@@ -1,21 +1,36 @@
-.ds-container {
+.container {
     display: flex;
+    flex-wrap: wrap;
     justify-items: center;
     align-items: center;
+    max-width: 250px;
+    min-width: 100px;
+    border-radius: 10px;
 
     background-color: #eee;
-    padding: 1rem;
+    padding: 2rem;
     gap: 1rem;
+
+    /* touch-action: none is important to disable scrolling 
+     * while drag-selecting (when using touch screen controls)
+     */
+    touch-action: none;
 }
 
+.item {
+    background-color: #ddd;
+    height: 50px;
+    width: 50px;
+}
+
+/* This is the default class that is applied to the selection box */
 .ds-selection-box {
     border: 1px solid #ac71ffaa;
     background-color: #c9a5fbaa;
     opacity: 50%;
 }
 
-.ds-selectable {
-    background-color: #ddd;
-    height: 50px;
-    width: 50px;
+/* This is the default class that is applied to a selected item */
+.ds-selected {
+    background-color: blueviolet;
 }
