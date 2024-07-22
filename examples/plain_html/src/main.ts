@@ -1,4 +1,4 @@
-import { DragSelect } from "./dragselect";
+import { DragSelect } from "../../../dragselect";
 import "./style.css";
 
 const selectableArea = document.getElementById("ds-selectable-area");

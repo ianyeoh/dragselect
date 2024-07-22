@@ -269,7 +269,7 @@ export class DragSelect {
      * @param {HTMLElement[]} items
      */
     removeSelectableItem(items: HTMLElement | HTMLElement[]): void {
-        const itemsArray = [];
+        const itemsArray: HTMLElement[] = [];
         if (!Array.isArray(items)) itemsArray.push(items);
         else itemsArray.push(...items);
 
