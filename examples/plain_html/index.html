@@ -8,17 +8,85 @@
     <title>ianyeoh/dragselect</title>
     <body>
         <div id="app">
-            <div class="page">
-                <h2>dragselect</h2>
-                <h3>a demo</h3>
+            <div class="page h-centered">
+                <a href="https://github.com/ianyeoh/dragselect">
+                    <h2 class="underline disable-select">dragselect</h2>
+                </a>
+                <h3 class="disable-select">a demo</h3>
 
-                <p class="top-spacing">Click and drag to select</p>
-                <div
-                    id="ds-selectable-area"
-                    class="container top-spacing"
-                ></div>
+                <div class="carousel">
+                    <button id="carousel-back" class="carousel-control">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="lucide lucide-chevron-left"
+                        >
+                            <path d="m15 18-6-6 6-6" />
+                        </svg>
+                    </button>
+
+                    <div class="carousel-deck">
+                        <div id="item-1" class="carousel-item h-centered">
+                            <p class="top-spacing disable-select">
+                                Click and drag to select
+                            </p>
+                            <div
+                                id="default-ds-selectable-area"
+                                class="container top-spacing"
+                            ></div>
+                            <p
+                                id="default-selected-items"
+                                class="top-spacing disable-select"
+                            ></p>
+                        </div>
+
+                        <div id="item-2" class="carousel-item h-centered">
+                            <p class="top-spacing disable-select">
+                                Items can be dynamically added, and removed
+                            </p>
+                            <div
+                                id="dynamic-ds-selectable-area"
+                                class="container top-spacing"
+                            ></div>
+
+                            <div class="top-spacing flex gap">
+                                <button id="dynamic-ds-remove-btn">
+                                    Remove an item
+                                </button>
+                                <button id="dynamic-ds-add-btn">
+                                    Add an item
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="carousel-next" class="carousel-control">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="lucide lucide-chevron-right"
+                        >
+                            <path d="m9 18 6-6-6-6" />
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
+
         <script type="module" src="/src/main.ts"></script>
     </body>
 </html>
