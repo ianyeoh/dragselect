@@ -289,9 +289,14 @@ export class DragSelect {
         else itemsArray.push(...items);
 
         itemsArray.forEach((item) => {
-            this.selectableItems.filter((selectableItem) =>
-                item.isEqualNode(selectableItem)
+            const index = this.selectableItems.findIndex((selectable) =>
+                item.isEqualNode(selectable)
             );
+
+            if (index !== -1) {
+                item.classList.remove(this.selectedClass);
+                this.selectableItems.splice(index, 1);
+            }
         });
     }
 
