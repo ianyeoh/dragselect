@@ -1,0 +1,41 @@
+name: Deploy demo to GitHub Pages
+run-name: Deploying to GitHub Pages 🚀
+on:
+  push:
+    branches:
+      - main
+jobs:
+  # Build the page using Vite
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    # Checkout main branch
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        path: main
+    # Install dependencies and build into ./dist
+    - run: cd demo
+    - run: npm i
+    - run: npm run build
+    # Package build artifact
+    - name: Upload build artifacts
+      uses: actions/upload-pages-artifact@v1
+      with:
+        path: ./dist
+  # Deploy build artifact to Github Pages
+  deploy:
+    needs: build    
+    # Grant GITHUB_TOKEN the permissions required to make a Pages deployment
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write   # to verify the deployment originates from an appropriate source
+    # Deploy to the github-pages environment
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
