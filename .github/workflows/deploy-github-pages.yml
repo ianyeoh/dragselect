@@ -12,15 +12,16 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
     - name: Install dependencies
-      run: ls && pwd && npm i
+      working-directory: ./demo
+      run: npm i
     - name: Build with Vite
-      working-directory: demo
+      working-directory: ./demo
       run: npm run build
     # Package build artifact
     - name: Upload build artifacts
       uses: actions/upload-pages-artifact@v1
       with:
-        path: demo/dist/
+        path: ./demo/dist/
   # Deploy build artifact to Github Pages
   deploy:
     needs: build    
