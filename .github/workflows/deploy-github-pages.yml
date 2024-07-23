@@ -9,20 +9,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    # Checkout main branch
     - name: Checkout
       uses: actions/checkout@v4
       with:
         path: main
-    # Install dependencies and build into ./dist
-    - run: cd /demo
-    - run: npm i
-    - run: npm run build
+    - name: Install dependencies
+      working-directory: ./demo
+      run: npm i
+    - name: Build with Vite
+      working-directory: ./demo
+      run: npm run build
     # Package build artifact
     - name: Upload build artifacts
       uses: actions/upload-pages-artifact@v1
       with:
-        path: ./dist
+        path: ./demo/dist/
   # Deploy build artifact to Github Pages
   deploy:
     needs: build    
