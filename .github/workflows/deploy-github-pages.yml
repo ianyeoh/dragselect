@@ -15,7 +15,7 @@ jobs:
         path: main
     - name: Install dependencies
       working-directory: demo
-      run: npm i
+      run: ls && pwd && npm i
     - name: Build with Vite
       working-directory: demo
       run: npm run build
