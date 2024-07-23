@@ -11,8 +11,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-      with:
-        path: main
     - name: Install dependencies
       run: ls && pwd && npm i
     - name: Build with Vite
