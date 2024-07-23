@@ -1,9 +1,9 @@
-import { DragSelect } from "../../../../dragselect";
+import { DragSelect } from "../../../dragselect";
 
-const selectableArea = document.getElementById("no-select-ds-selectable-area");
+const selectableArea = document.getElementById("disable-ds-selectable-area");
 if (!selectableArea)
     throw new Error(
-        "Selectable area element not found (must have id: no-select-ds-selectable-area)"
+        "Selectable area element not found (must have id: disable-ds-selectable-area)"
     );
 
 const ds = new DragSelect({
@@ -25,3 +25,12 @@ for (let i = 0; i < numItems; i++) {
     itemIndexText.innerText = String(i);
     newSelectableItem.appendChild(itemIndexText);
 }
+
+const toggleBtn = document.getElementById("toggle-ds-btn");
+if (toggleBtn)
+    toggleBtn.addEventListener("change", () => {
+        if (toggleBtn instanceof HTMLInputElement) {
+            if (toggleBtn.checked) ds.enable();
+            else ds.disable();
+        }
+    });

@@ -1,4 +1,4 @@
-import { DragSelect } from "../../../../dragselect";
+import { DragSelect } from "../../../dragselect";
 
 function updateSelectedItemsText(selectedItems: HTMLElement[]) {
     const selectedItemsText = document.getElementById("default-selected-items");

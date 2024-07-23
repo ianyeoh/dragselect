@@ -1,4 +1,4 @@
-import { DragSelect } from "../../../../dragselect";
+import { DragSelect } from "../../../dragselect";
 
 let items: HTMLElement[] = [];
 function createItem() {
