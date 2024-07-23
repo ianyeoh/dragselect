@@ -19,8 +19,9 @@ jobs:
       run: npm run build
     # Package build artifact
     - name: Upload build artifacts
-      uses: actions/upload-pages-artifact@v4
+      uses: actions/upload-artifact@v4
       with:
+        name: github-pages
         path: ./demo/dist/
   # Deploy build artifact to Github Pages
   deploy:
