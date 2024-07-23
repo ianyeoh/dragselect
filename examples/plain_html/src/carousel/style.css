@@ -17,6 +17,12 @@ button.carousel-control {
     border-radius: 50%;
 }
 
+button.carousel-control:disabled {
+    background-color: #bababa;
+    color: #444;
+    box-shadow: none;
+}
+
 .carousel-deck {
     display: flex;
     gap: 20px;

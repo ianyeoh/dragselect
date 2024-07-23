@@ -289,18 +289,34 @@ export class DragSelect {
         else itemsArray.push(...items);
 
         itemsArray.forEach((item) => {
-            const index = this.selectableItems.findIndex((selectable) =>
-                item.isEqualNode(selectable)
+            /* Remove from selectable items array */
+            const selectableItemsIndex = this.selectableItems.findIndex(
+                (selectable) => item.isEqualNode(selectable)
             );
 
-            if (index !== -1) {
+            if (selectableItemsIndex !== -1) {
+                this.selectableItems.splice(selectableItemsIndex, 1);
+            }
+
+            /* Remove from selected items array, if present */
+            const selectedItemsIndex = this.selectedItems.findIndex(
+                (selectable) => {
+                    item.isEqualNode(selectable);
+                }
+            );
+
+            if (selectedItemsIndex !== -1) {
+                this.selectableItems.splice(selectedItemsIndex, 1);
                 item.classList.remove(this.selectedClass);
-                this.selectableItems.splice(index, 1);
             }
         });
     }
 
     disable() {
+        this.selectedItems.forEach((item) =>
+            item.classList.remove(this.selectedClass)
+        );
+        this.selectedItems = [];
         this.disabled = true;
     }
 

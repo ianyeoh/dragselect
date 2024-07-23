@@ -12,9 +12,9 @@
                 <a href="https://github.com/ianyeoh/dragselect">
                     <h2 class="underline disable-select">dragselect</h2>
                 </a>
-                <h3 class="disable-select">a demo</h3>
+                <h3 class="disable-select">demo</h3>
 
-                <div class="carousel">
+                <div id="carousel" class="carousel">
                     <button id="carousel-back" class="carousel-control">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -32,7 +32,7 @@
                         </svg>
                     </button>
 
-                    <div class="carousel-deck">
+                    <div id="carousel-deck" class="carousel-deck">
                         <div id="item-1" class="carousel-item h-centered">
                             <p class="top-spacing disable-select">
                                 Click and drag to select
@@ -63,6 +63,57 @@
                                 <button id="dynamic-ds-add-btn">
                                     Add an item
                                 </button>
+                            </div>
+                        </div>
+
+                        <div id="item-3" class="carousel-item h-centered">
+                            <p class="top-spacing disable-select">
+                                Disable certain areas from starting a
+                                drag-select
+                            </p>
+                            <div
+                                id="no-select-ds-selectable-area"
+                                class="container top-spacing"
+                            >
+                                <div class="ds-no-select item">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="#ffffff"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="lucide lucide-x ds-no-select"
+                                    >
+                                        <path d="M18 6 6 18" />
+                                        <path d="m6 6 12 12" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="item-4" class="carousel-item h-centered">
+                            <p class="top-spacing disable-select">
+                                Drag-select can be programatically
+                                enabled/disabled
+                            </p>
+                            <div
+                                id="disable-ds-selectable-area"
+                                class="container top-spacing"
+                            ></div>
+
+                            <div class="top-spacing flex">
+                                <label class="switch">
+                                    <input
+                                        id="toggle-ds-btn"
+                                        type="checkbox"
+                                        checked
+                                    />
+                                    <span class="slider round"></span>
+                                </label>
                             </div>
                         </div>
                     </div>
