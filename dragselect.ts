@@ -9,6 +9,7 @@ export type DS$Options = {
     selectableElements?: HTMLElement[]; // ---    []
     selectionBoxClass?: string; // -----------    "ds-selection-box"
     selectedClass?: string; // ---------------    "ds-selected"
+    noSelectClass?: string; // ---------------    "ds-no-select"
 
     // Drag-select lifecycle callbacks
     onStart?: () => void;
@@ -17,6 +18,8 @@ export type DS$Options = {
 };
 
 export class DragSelect {
+    disabled: boolean = false; // disables drag-select from starting if true
+
     selecting: boolean = false;
     selectableArea: HTMLElement = document.body;
     selectableItems: HTMLElement[] = [];
@@ -26,6 +29,7 @@ export class DragSelect {
     selectionBoxOrigin: DS$Coordinate | null = null;
 
     selectedClass: string = "ds-selected";
+    noSelectClass: string = "ds-no-select";
     selectedItems: HTMLElement[] = [];
 
     onStart: (() => void) | null = null;
@@ -87,6 +91,7 @@ export class DragSelect {
         selectionBoxClass,
         selectableElements,
         selectedClass,
+        noSelectClass,
         onStart,
         onDrag,
         onEnd,
@@ -94,6 +99,7 @@ export class DragSelect {
         if (selectableArea) this.selectableArea = selectableArea;
         if (selectableElements) this.selectableItems = selectableElements;
         if (selectedClass) this.selectedClass = selectedClass;
+        if (noSelectClass) this.noSelectClass = noSelectClass;
         if (onStart) this.onStart = onStart;
         if (onDrag) this.onDrag = onDrag;
         if (onEnd) this.onEnd = onEnd;
@@ -130,10 +136,19 @@ export class DragSelect {
      * and records the mouse location where the drag-select was started
      * to draw the selection box.
      *
+     * Early return if disabled, or the mouse-down target contains the noSelect class.
+     *
      * @param {MouseEvent | TouchEvent} e
      * @returns {void}
      */
     onDragStart(e: MouseEvent | TouchEvent): void {
+        if (this.disabled) return;
+
+        /* Prevent drag starting on an element that contains the noSelect class name */
+        if (e.target && e.target instanceof HTMLElement) {
+            if (e.target.classList.contains(this.noSelectClass)) return;
+        }
+
         this.selecting = true;
         this.selectedItems = [];
         this.selectableItems.forEach((item) =>
@@ -269,14 +284,43 @@ export class DragSelect {
      * @param {HTMLElement[]} items
      */
     removeSelectableItem(items: HTMLElement | HTMLElement[]): void {
-        const itemsArray = [];
+        const itemsArray: HTMLElement[] = [];
         if (!Array.isArray(items)) itemsArray.push(items);
         else itemsArray.push(...items);
 
         itemsArray.forEach((item) => {
-            this.selectableItems.filter((selectableItem) =>
-                item.isEqualNode(selectableItem)
+            /* Remove from selectable items array */
+            const selectableItemsIndex = this.selectableItems.findIndex(
+                (selectable) => item.isEqualNode(selectable)
             );
+
+            if (selectableItemsIndex !== -1) {
+                this.selectableItems.splice(selectableItemsIndex, 1);
+            }
+
+            /* Remove from selected items array, if present */
+            const selectedItemsIndex = this.selectedItems.findIndex(
+                (selectable) => {
+                    item.isEqualNode(selectable);
+                }
+            );
+
+            if (selectedItemsIndex !== -1) {
+                this.selectableItems.splice(selectedItemsIndex, 1);
+                item.classList.remove(this.selectedClass);
+            }
         });
+    }
+
+    disable() {
+        this.selectedItems.forEach((item) =>
+            item.classList.remove(this.selectedClass)
+        );
+        this.selectedItems = [];
+        this.disabled = true;
+    }
+
+    enable() {
+        this.disabled = false;
     }
 }

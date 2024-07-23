@@ -1,0 +1,42 @@
+.carousel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+button.carousel-control {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: #444;
+    padding: 0;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
+}
+
+button.carousel-control:disabled {
+    background-color: #bababa;
+    color: #444;
+    box-shadow: none;
+}
+
+.carousel-deck {
+    display: flex;
+    gap: 20px;
+    width: 420px;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    border-radius: 10px;
+}
+
+.carousel-item {
+    scroll-snap-align: center;
+    box-sizing: border-box;
+    padding: 20px 30px;
+    flex-shrink: 0;
+    width: 420px;
+    scroll-snap-align: center;
+}

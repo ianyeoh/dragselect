@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    </head>
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <title>ianyeoh/dragselect</title>
+    <body>
+        <div id="app">
+            <div class="page h-centered">
+                <a href="https://github.com/ianyeoh/dragselect">
+                    <h2 class="underline disable-select">dragselect</h2>
+                </a>
+                <h3 class="disable-select">demo</h3>
+
+                <div id="carousel" class="carousel">
+                    <button id="carousel-back" class="carousel-control">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="lucide lucide-chevron-left"
+                        >
+                            <path d="m15 18-6-6 6-6" />
+                        </svg>
+                    </button>
+
+                    <div id="carousel-deck" class="carousel-deck">
+                        <div id="item-1" class="carousel-item h-centered">
+                            <p class="top-spacing disable-select">
+                                Click and drag to select
+                            </p>
+                            <div
+                                id="default-ds-selectable-area"
+                                class="container top-spacing"
+                            ></div>
+                            <p
+                                id="default-selected-items"
+                                class="top-spacing disable-select"
+                            ></p>
+                        </div>
+
+                        <div id="item-2" class="carousel-item h-centered">
+                            <p class="top-spacing disable-select">
+                                Items can be dynamically added, and removed
+                            </p>
+                            <div
+                                id="dynamic-ds-selectable-area"
+                                class="container top-spacing"
+                            ></div>
+
+                            <div class="top-spacing flex gap">
+                                <button id="dynamic-ds-remove-btn">
+                                    Remove an item
+                                </button>
+                                <button id="dynamic-ds-add-btn">
+                                    Add an item
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="item-3" class="carousel-item h-centered">
+                            <p class="top-spacing disable-select">
+                                Disable certain areas from starting a
+                                drag-select
+                            </p>
+                            <div
+                                id="no-select-ds-selectable-area"
+                                class="container top-spacing"
+                            >
+                                <div class="ds-no-select item">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        width="20"
+                                        height="20"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="#ffffff"
+                                        stroke-width="2"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        class="lucide lucide-x ds-no-select"
+                                    >
+                                        <path d="M18 6 6 18" />
+                                        <path d="m6 6 12 12" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="item-4" class="carousel-item h-centered">
+                            <p class="top-spacing disable-select">
+                                Drag-select can be programatically
+                                enabled/disabled
+                            </p>
+                            <div
+                                id="disable-ds-selectable-area"
+                                class="container top-spacing"
+                            ></div>
+
+                            <div class="top-spacing flex">
+                                <label class="switch">
+                                    <input
+                                        id="toggle-ds-btn"
+                                        type="checkbox"
+                                        checked
+                                    />
+                                    <span class="slider round"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button id="carousel-next" class="carousel-control">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="18"
+                            height="18"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="lucide lucide-chevron-right"
+                        >
+                            <path d="m9 18 6-6-6-6" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <script type="module" src="/src/main.ts"></script>
+    </body>
+</html>
