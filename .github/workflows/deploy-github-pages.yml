@@ -15,7 +15,7 @@ jobs:
       with:
         path: main
     # Install dependencies and build into ./dist
-    - run: cd demo
+    - run: cd /demo
     - run: npm i
     - run: npm run build
     # Package build artifact
