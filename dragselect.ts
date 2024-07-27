@@ -143,6 +143,8 @@ export class DragSelect {
 
     #cleanupEventListeners() {
         this.globalEventController.abort();
+        // Can't be re-used
+        this.globalEventController = new AbortController();
     }
 
     /**
