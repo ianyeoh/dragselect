@@ -145,7 +145,7 @@ export class DragSelect {
         if (this.disabled) return;
 
         /* Prevent drag starting on an element that contains the noSelect class name */
-        if (e.target && e.target instanceof HTMLElement) {
+        if (e.target && e.target instanceof Element) {
             if (e.target.classList.contains(this.noSelectClass)) return;
         }
 
