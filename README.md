@@ -67,13 +67,21 @@ The constructor for the class takes an optional [options object](#options) for a
 ```typescript
 // All available options object with default values
 const ds = new DragSelect({
+    // the HTML element where a drag-select can begin
     selectableArea: document.body,
+    // elements that can be selected
     selectableElements: [],
+    // CSS class applied to the selection box
     selectionBoxClass: "ds-selection-box",
+    // CSS class applied to selected elements
     selectedClass: "ds-selected",
+    // CSS class that disables drag-selection on element
     noSelectClass: "ds-no-select",
+    // function called when drag-select starts
     onStart: null,
+    // function called when drag-select is dragged
     onDrag: null,
+    // function called when drag-select ends
     onEnd: null,
 });
 ```
