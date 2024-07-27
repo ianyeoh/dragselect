@@ -32,6 +32,11 @@ export class DragSelect {
     noSelectClass: string = "ds-no-select";
     selectedItems: HTMLElement[] = [];
 
+    /* This is an AbortController that is passed to all event handlers.
+     * Use this.globalEventController.abort() to remove all event handlers.
+     */
+    globalEventController = new AbortController();
+
     onStart: (() => void) | null = null;
     onDrag: ((selectedItems: HTMLElement[]) => void) | null = null;
     onEnd: ((selectedItems: HTMLElement[]) => void) | null = null;
@@ -47,37 +52,6 @@ export class DragSelect {
         document.body.appendChild(this.selectionBox);
 
         if (options) this.configure(options);
-
-        /*
-         * Register the event listeners that trigger each stage of the drag-select
-         * interaction lifecycle. These can be configured to run on any browser
-         * supported event, on any element on the page, depending on the intended
-         * interaction.
-         *
-         * For example, drag selection can be bound to a keyboard key instead.
-         */
-
-        /* Mouse-based drag-select */
-        this.selectableArea.addEventListener("mousedown", (e) => {
-            this.onDragStart(e);
-        });
-        document.addEventListener("mousemove", (e) => {
-            this.onDragUpdate(e);
-        });
-        document.addEventListener("mouseup", (e) => {
-            this.onDragEnd(e);
-        });
-
-        /* Mobile-based (touchscreen) drag-select */
-        this.selectableArea.addEventListener("touchstart", (e) => {
-            this.onDragStart(e);
-        });
-        document.addEventListener("touchmove", (e) => {
-            this.onDragUpdate(e);
-        });
-        document.addEventListener("touchend", (e) => {
-            this.onDragEnd(e);
-        });
     }
 
     /**
@@ -96,7 +70,9 @@ export class DragSelect {
         onDrag,
         onEnd,
     }: DS$Options) {
-        if (selectableArea) this.selectableArea = selectableArea;
+        if (selectableArea) {
+            this.selectableArea = selectableArea;
+        }
         if (selectableElements) this.selectableItems = selectableElements;
         if (selectedClass) this.selectedClass = selectedClass;
         if (noSelectClass) this.noSelectClass = noSelectClass;
@@ -104,6 +80,69 @@ export class DragSelect {
         if (onDrag) this.onDrag = onDrag;
         if (onEnd) this.onEnd = onEnd;
         if (selectionBoxClass) this.selectionBox.className = selectionBoxClass;
+
+        this.#cleanupEventListeners();
+        this.#registerEventListeners();
+    }
+
+    /**
+     * Register the event listeners that trigger each stage of the drag-select
+     * interaction lifecycle. These can be configured to run on any browser
+     * supported event, on any element on the page, depending on the intended
+     * interaction.
+     *
+     * For example, drag selection can be bound to a keyboard key instead.
+     */
+    #registerEventListeners() {
+        /* Mouse-based drag-select */
+        this.selectableArea.addEventListener(
+            "mousedown",
+            (e) => {
+                this.onDragStart(e);
+            },
+            { signal: this.globalEventController.signal }
+        );
+        document.addEventListener(
+            "mousemove",
+            (e) => {
+                this.onDragUpdate(e);
+            },
+            { signal: this.globalEventController.signal }
+        );
+        document.addEventListener(
+            "mouseup",
+            (e) => {
+                this.onDragEnd(e);
+            },
+            { signal: this.globalEventController.signal }
+        );
+
+        /* Mobile-based (touchscreen) drag-select */
+        this.selectableArea.addEventListener(
+            "touchstart",
+            (e) => {
+                this.onDragStart(e);
+            },
+            { signal: this.globalEventController.signal }
+        );
+        document.addEventListener(
+            "touchmove",
+            (e) => {
+                this.onDragUpdate(e);
+            },
+            { signal: this.globalEventController.signal }
+        );
+        document.addEventListener(
+            "touchend",
+            (e) => {
+                this.onDragEnd(e);
+            },
+            { signal: this.globalEventController.signal }
+        );
+    }
+
+    #cleanupEventListeners() {
+        this.globalEventController.abort();
     }
 
     /**
