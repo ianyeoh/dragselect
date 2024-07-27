@@ -4,7 +4,7 @@ A lightweight library that implements a simple click and drag-to-select interact
 
 ![Alt Text](assets/dragselect.gif)
 
-This is **not** a package hosted on the npm registry. The class file (dragselect.ts) is intended to be copy and pasted into your codebase, as this allows you to own the code and extend it to fit your exact needs, with no unused code. I wrote´this library as a starting point for writing custom drag-select based interactions as I often found it difficult to use out-of-the-box libraries for highly specific use-cases.
+This is **not** a package hosted on the npm registry. The class file (dragselect.ts) is intended to be copy and pasted into your codebase, as this allows you to customise and extend it to fit your exact needs. I wrote this library as a starting point for writing custom drag-select based interactions as I often found it difficult to use out-of-the-box libraries for highly specific interactions.
 
 ## Table of Contents
 
